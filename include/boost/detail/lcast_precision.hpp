@@ -82,11 +82,13 @@ struct lcast_precision
             2UL + limits::digits * 30103UL / 100000UL
         );
 
+#ifndef PYROSETTA_DISABLE_LCAST_COMPILE_TIME_CHECK
     BOOST_STATIC_ASSERT(!is_specialized_bin ||
             (limits::digits + 0UL < ULONG_MAX / 30103UL &&
             precision_bin > limits::digits10 + 0UL &&
             precision_bin <= streamsize_max + 0UL)
         );
+#endif
 
     BOOST_STATIC_CONSTANT(std::streamsize, value =
             is_specialized_bin ? precision_bin
